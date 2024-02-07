@@ -2,7 +2,11 @@ FROM --platform=linux/amd64 registry.access.redhat.com/ubi9/ubi-minimal:latest a
 
 RUN microdnf update --nodocs --assumeyes  && microdnf install ca-certificates --nodocs --assumeyes 
 
-FROM registry.access.redhat.com/ubi9/ubi-micro:latest
+FROM registry.access.redhat.com/ubi9/ubi-minimal:latest
+
+RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+
+RUN microdnf update --nodocs --assumeyes  && microdnf install inotify-tools --nodocs --assumeyes 
 
 ARG TARGETARCH
 ARG RELEASE
